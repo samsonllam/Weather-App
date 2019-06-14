@@ -1,21 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package weather.app;
+
+import static weather.app.WeatherHolder.*;
+import static weather.app.WeatherUI.dateLabel;
+import static weather.app.WeatherUI.descriptionLabel;
+import static weather.app.WeatherUI.temperatureLabel;
+import static weather.app.WeatherUI.locationLabel;
 
 /**
  *
  * @author Kamil
  */
-public class WeatherApp {
-
-    /**
-     * @param args the command line arguments
-     */
+public class WeatherApp{
+     
     public static void main(String[] args) {
-        // TODO code application logic here
+        new WeatherUI();
+        new CurrentWeather();
+        
+        temperatureLabel.setText(temperature + "°");
+        dateLabel.setText(dateNow);
+        locationLabel.setText(location);
+        System.out.println(clouds + " " + rain + "" + snow);
+        descriptionLabel.setText(description);
     }
     
 }
