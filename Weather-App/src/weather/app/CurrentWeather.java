@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static weather.app.WeatherApp.*;
 import static weather.app.WeatherHolder.*;
 /**
  *
@@ -23,8 +24,6 @@ import static weather.app.WeatherHolder.*;
 public class CurrentWeather {
     
     public CurrentWeather(){
-        String myLocation = "Warsaw";
-        String myApi = "3c3f9bbe0fc53397db130c66d0e813ea";
         OpenWeatherMapManager openWeatherManager = new OpenWeatherMapManager(myApi);
         WeatherRequester weatherRequester = openWeatherManager.getWeatherRequester();
         
@@ -46,13 +45,11 @@ public class CurrentWeather {
         location = weatherResponse.getCityName().toString();
         
         if (weatherResponse.getClouds() == null) {
-            rain = "without clouds";
+            clouds = "without clouds";
         } else {
-            rain = weatherResponse.getClouds().toString();
+            clouds = weatherResponse.getClouds().toString();
         }
-        
-        System.out.println(weatherResponse.getRain());
-        
+                
         if(weatherResponse.getRain() == null)
         { 
             rain = "without rain"; 

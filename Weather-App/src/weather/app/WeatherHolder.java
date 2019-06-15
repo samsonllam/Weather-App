@@ -17,4 +17,10 @@ public class WeatherHolder {
     public static String rain;
     public static String snow;
     public static String description;
+    
+    public static String nextDay;
+    public static String NextDayWeatherCond;
+    
+    public static String dayAfterTomorrow;
+    public static String dayAfterTomorrowCond;
 }
