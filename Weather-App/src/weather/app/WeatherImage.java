@@ -7,6 +7,7 @@ package weather.app;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import static weather.app.WeatherApp.playMusic;
 import static weather.app.WeatherHolder.*;
 import static weather.app.WeatherUI.gifLabel;
 import static weather.app.WeatherUI.imageLabel;
@@ -19,31 +20,34 @@ import static weather.app.WeatherUI.nextDayImage1;
  */
 public class WeatherImage {
     
-    public WeatherImage(){        
-        Icon sunIcon = new ImageIcon("src/images/sun.png");
-        Icon thunderIcon = new ImageIcon("src/images/thunderstorm.png");
-        Icon rainIcon = new ImageIcon("src/images/rain.png");
-        Icon drizzleIcon = new ImageIcon("src/images/drizzle.png");
-        Icon snowIcon = new ImageIcon("src/images/snow.png");
-        Icon fewCloudsIcon = new ImageIcon("src/images/few_clouds.png");
-        Icon scatteredCloudsIcon = new ImageIcon("src/images/scattered_clouds.png");
-        Icon brokenCloudsImage = new ImageIcon("src/images/broken_clouds.png");
-        Icon mistIcon = new ImageIcon("src/images/mist.png");
-        ImageIcon raindropGif = new ImageIcon("src/images/raindrop.gif");
+    public WeatherImage() throws InterruptedException{        
+        Icon sunIcon = new ImageIcon("resources/weather_icons/sun.png");
+        Icon moonIcon = new ImageIcon("resources/weather_icons/moon.png");
+        Icon thunderIcon = new ImageIcon("resources/weather_icons/thunderstorm.png");
+        Icon rainIcon = new ImageIcon("resources/weather_icons/rain.png");
+        Icon drizzleIcon = new ImageIcon("resources/weather_icons/drizzle.png");
+        Icon snowIcon = new ImageIcon("resources/weather_icons/snow.png");
+        Icon fewCloudsIcon = new ImageIcon("resources/weather_icons/few_clouds.png");
+        Icon scatteredCloudsIcon = new ImageIcon("resources/weather_icons/scattered_clouds.png");
+        Icon brokenCloudsImage = new ImageIcon("resources/weather_icons/broken_clouds.png");
+        Icon mistIcon = new ImageIcon("resources/weather_icons/mist.png");
+        ImageIcon raindropGif = new ImageIcon("resources/weather_gifs/raindrop.gif");
+        ImageIcon thunderGif = new ImageIcon("resources/weather_gifs/thunder.gif");
+        ImageIcon snowGif = new ImageIcon("resources/weather_gifs/snow.gif");
         
         /* Current day weather image */
         switch(description){
             /* Thunderstorm */
-            case "thunderstorm with light rain": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm with rain": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm with heavy rain": imageLabel.setIcon(thunderIcon); break;
-            case "light thunderstorm": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm": imageLabel.setIcon(thunderIcon); break;
-            case "heavy thunderstorm": imageLabel.setIcon(thunderIcon); break;
-            case "ragged thunderstorm": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm with light drizzle": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm with drizzle": imageLabel.setIcon(thunderIcon); break;
-            case "thunderstorm with heavy drizzle": imageLabel.setIcon(thunderIcon); break;
+            case "thunderstorm with light rain": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm with rain": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm with heavy rain": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "light thunderstorm": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "heavy thunderstorm": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "ragged thunderstorm": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm with light drizzle": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm with drizzle": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
+            case "thunderstorm with heavy drizzle": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
             
             /* Drizzle */
             case "light intensity drizzle": imageLabel.setIcon(drizzleIcon); break;
@@ -57,32 +61,33 @@ public class WeatherImage {
             case "shower drizzle": imageLabel.setIcon(drizzleIcon); break;
             
             /* Snow */
-            case "light snow": imageLabel.setIcon(snowIcon); break;
-            case "Snow": imageLabel.setIcon(snowIcon); break;
-            case "Heavy snow": imageLabel.setIcon(snowIcon); break;
-            case "Sleet": imageLabel.setIcon(snowIcon); break;
-            case "Light shower sleet": imageLabel.setIcon(snowIcon); break;
-            case "Shower sleet": imageLabel.setIcon(snowIcon); break;
-            case "Light rain and snow": imageLabel.setIcon(snowIcon); break;
-            case "Rain and snow": imageLabel.setIcon(snowIcon); break;
-            case "Light shower snow": imageLabel.setIcon(snowIcon); break;
-            case "Shower snow": imageLabel.setIcon(snowIcon); break;
-            case "Heavy shower snow": imageLabel.setIcon(snowIcon); break;
+            case "light snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Heavy snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light shower sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Shower sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light rain and snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Rain and snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Heavy shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
             
             /* Rain */
-            case "light rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "moderate rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "heavy intensity rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "very heavy rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "extreme rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "freezing rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "light intensity shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "heavy intensity shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
-            case "ragged shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); break;
+            case "light rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "moderate rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "heavy intensity rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "very heavy rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "extreme rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "freezing rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "light intensity shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
+            case "heavy intensity shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain");break;
+            case "ragged shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
             
             /* Clear */ 
-            case "clear sky": imageLabel.setIcon(sunIcon); break;
+            case "clear sky": if(dayOrNight == "day"){imageLabel.setIcon(sunIcon);break;}
+            else if(dayOrNight == "night"){imageLabel.setIcon(moonIcon);} break;
             
             /* Clouds */
             case "few clouds": imageLabel.setIcon(fewCloudsIcon); break;
@@ -103,15 +108,15 @@ public class WeatherImage {
             case "tornado": imageLabel.setIcon(mistIcon); break;
         }
         
-        Icon sunIconBlack = new ImageIcon("src/images/sun_black.png");
-        Icon thunderIconBlack = new ImageIcon("src/images/thunderstorm_black.png");
-        Icon rainIconBlack = new ImageIcon("src/images/rain_black.png");
-        Icon drizzleIconBlack = new ImageIcon("src/images/drizzle_black.png");
-        Icon snowIconBlack = new ImageIcon("src/images/snow_black.png");
-        Icon fewCloudsIconBlack = new ImageIcon("src/images/few_clouds_black.png");
-        Icon scatteredCloudsIconBlack = new ImageIcon("src/images/scattered_clouds_black.png");
-        Icon brokenCloudsImageBlack = new ImageIcon("src/images/broken_clouds_black.png");
-        Icon mistIconBlack = new ImageIcon("src/images/mist_black.png");
+        Icon sunIconBlack = new ImageIcon("resources/weather_icons/sun_black.png");
+        Icon thunderIconBlack = new ImageIcon("resources/weather_icons/thunderstorm_black.png");
+        Icon rainIconBlack = new ImageIcon("resources/weather_icons/rain_black.png");
+        Icon drizzleIconBlack = new ImageIcon("resources/weather_icons/drizzle_black.png");
+        Icon snowIconBlack = new ImageIcon("resources/weather_icons/snow_black.png");
+        Icon fewCloudsIconBlack = new ImageIcon("resources/weather_icons/few_clouds_black.png");
+        Icon scatteredCloudsIconBlack = new ImageIcon("resources/weather_icons/scattered_clouds_black.png");
+        Icon brokenCloudsImageBlack = new ImageIcon("resources/weather_icons/broken_clouds_black.png");
+        Icon mistIconBlack = new ImageIcon("resources/weather_icons/mist_black.png");
         
         /* Tomorrow weather image */
         switch(NextDayWeatherCond){

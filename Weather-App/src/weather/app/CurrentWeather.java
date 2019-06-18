@@ -44,26 +44,6 @@ public class CurrentWeather {
         dateNow = dateFormat.format(date).toString();
         location = weatherResponse.getCityName().toString();
         
-        if (weatherResponse.getClouds() == null) {
-            clouds = "without clouds";
-        } else {
-            clouds = weatherResponse.getClouds().toString();
-        }
-                
-        if(weatherResponse.getRain() == null)
-        { 
-            rain = "without rain"; 
-        }else {
-            rain = weatherResponse.getRain().toString();
-        }
-        
-        if(weatherResponse.getSnow() == null)
-        { 
-            snow = "without snow"; 
-        }else {
-            snow = weatherResponse.getSnow().toString();
-        }
-        
         description = weatherResponse.getWeatherDescription().toString();
     }
 }
