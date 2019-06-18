@@ -5,7 +5,7 @@ Minimalist app with local weather. Weather forecast is fetched from openweatherm
 
 ## Screenshots
 
-![alt text](https://github.com/kamillobinski/readmeff/blob/master/weather-app-preview.png)
+![alt text](https://github.com/kamillobinski/Weather-App/blob/master/weather-app-preview.png)
 
 ## Features
 
