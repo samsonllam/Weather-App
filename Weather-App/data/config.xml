@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><users><user id="0"><location>Plock</location><api>3c3f9bbe0fc53397db130c66d0e813ea</api><color>lightblue</color></user></users>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><users>
+	<user id="0">
+		<location>Glasgow</location>
+		<api>3c3f9bbe0fc53397db130c66d0e813ea</api>
+		<color>dark</color>
+	</user>
+</users>
