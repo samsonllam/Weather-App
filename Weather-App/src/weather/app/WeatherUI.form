@@ -325,7 +325,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="160" y="160" width="90" height="20"/>
+          <AbsoluteConstraints x="160" y="160" width="130" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -399,7 +399,7 @@
     <Container class="javax.swing.JPanel" name="colorPanelMain">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="myColor" type="code"/>
+          <Connection code="backgroundColor" type="code"/>
         </Property>
       </Properties>
       <AuxValues>

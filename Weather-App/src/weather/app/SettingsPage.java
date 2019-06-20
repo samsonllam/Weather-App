@@ -9,27 +9,16 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.border.MatteBorder;
-import static weather.app.WeatherApp.myApi;
-import static weather.app.WeatherApp.screenHeight;
-import static weather.app.WeatherApp.screenWidth;
-import static weather.app.WeatherApp.myLocation;
-import static weather.app.WeatherHolder.*;
-import static weather.app.WeatherUI.dateLabel;
-import static weather.app.WeatherUI.descriptionLabel;
-import static weather.app.WeatherUI.locationLabel;
-import static weather.app.WeatherUI.myColor;
-import static weather.app.WeatherUI.nextDayCondLabel;
-import static weather.app.WeatherUI.nextDayCondLabel1;
-import static weather.app.WeatherUI.nextDayLabel;
-import static weather.app.WeatherUI.nextDayLabel1;
-import static weather.app.WeatherUI.temperatureLabel;
-import static weather.app.WeatherUI.nextDayTempLabel;
-import static weather.app.WeatherUI.dayAfterTomorrowTempLabel;
-import static weather.app.WeatherUI.placeholderLabel;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import static weather.app.Data.writeData;
+import static weather.app.WeatherApp.*;
 import static weather.app.ThemeColor.*;
+import static weather.app.WeatherForecast.getCurrentWeather;
+import static weather.app.WeatherForecast.getDayAfterTomorrowWeather;
+import static weather.app.WeatherForecast.getTomorrowWeather;
 
 /**
  *
@@ -41,16 +30,6 @@ public class SettingsPage extends javax.swing.JFrame {
     int mouseY;
     
     Color textfieldline = new Color(234,235,237);
-    Color dark = new Color(29, 26, 49);
-    Color blue = new Color(0,102,255);
-    Color red = new Color(255,51,51);
-    Color redText = new Color(249, 134, 134);
-    Color orange = new Color(255,102,0);
-    Color blueText = new Color(51,153,255);
-    Color orangeText = new Color(255, 166, 107);
-    Icon bluePlaceholder = new ImageIcon("resources/images/placeholder.png");
-    Icon redPlaceholder = new ImageIcon("resources/images/placeholder_red.png");
-    Icon orangePlaceholder = new ImageIcon("resources/images/placeholder_orange.png");
     
     /**
      * Creates new form SettingsPage
@@ -64,12 +43,10 @@ public class SettingsPage extends javax.swing.JFrame {
         setTitle("WeatherApp");
         setDefaultCloseOperation(3);
         
-        jTextField1.setText(myLocation);
+        jTextField1.setText(location);
         jTextField1.setBorder(new MatteBorder(0, 0, 1, 0, textfieldline));
-        jTextField3.setText(myApi);
+        jTextField3.setText(api);
         jTextField3.setBorder(new MatteBorder(0, 0, 1, 0, textfieldline));
-        
-        jLabel12.setBackground(myColor);
     }
 
     /**
@@ -81,20 +58,20 @@ public class SettingsPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel12 = new javax.swing.JLabel();
+        settingsApplyChangesLabel = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        orangeThemeColorLabel = new javax.swing.JLabel();
+        greenThemeColorLabel = new javax.swing.JLabel();
+        lightblueThemeColorLabel = new javax.swing.JLabel();
+        redThemeColorLabel = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        darkThemeColorLabel = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        settingsLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         closeLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -104,19 +81,19 @@ public class SettingsPage extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Arial Nova", 0, 10)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Apply changes");
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        settingsApplyChangesLabel.setBackground(new java.awt.Color(255, 255, 255));
+        settingsApplyChangesLabel.setFont(new java.awt.Font("Arial Nova", 0, 10)); // NOI18N
+        settingsApplyChangesLabel.setForeground(new java.awt.Color(153, 153, 153));
+        settingsApplyChangesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        settingsApplyChangesLabel.setText("Apply changes");
+        settingsApplyChangesLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        settingsApplyChangesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
+                settingsApplyChangesLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(20, 460, 260, 30);
+        getContentPane().add(settingsApplyChangesLabel);
+        settingsApplyChangesLabel.setBounds(20, 460, 260, 30);
 
         jSeparator2.setForeground(new java.awt.Color(234, 235, 237));
         getContentPane().add(jSeparator2);
@@ -126,49 +103,49 @@ public class SettingsPage extends javax.swing.JFrame {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(20, 230, 260, 10);
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png"))); // NOI18N
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        orangeThemeColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png"))); // NOI18N
+        orangeThemeColorLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        orangeThemeColorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                orangeThemeColorLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(180, 300, 40, 40);
+        getContentPane().add(orangeThemeColorLabel);
+        orangeThemeColorLabel.setBounds(180, 300, 40, 40);
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        greenThemeColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png"))); // NOI18N
+        greenThemeColorLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        greenThemeColorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                greenThemeColorLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(130, 300, 40, 40);
+        getContentPane().add(greenThemeColorLabel);
+        greenThemeColorLabel.setBounds(130, 300, 40, 40);
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lightblueThemeColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png"))); // NOI18N
+        lightblueThemeColorLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lightblueThemeColorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                lightblueThemeColorLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(80, 300, 40, 40);
+        getContentPane().add(lightblueThemeColorLabel);
+        lightblueThemeColorLabel.setBounds(80, 300, 40, 40);
 
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png"))); // NOI18N
-        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        redThemeColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png"))); // NOI18N
+        redThemeColorLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        redThemeColorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                redThemeColorLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(230, 300, 40, 40);
+        getContentPane().add(redThemeColorLabel);
+        redThemeColorLabel.setBounds(230, 300, 40, 40);
 
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setForeground(new java.awt.Color(102, 102, 102));
@@ -195,16 +172,16 @@ public class SettingsPage extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 180, 60, 20);
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png"))); // NOI18N
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        darkThemeColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png"))); // NOI18N
+        darkThemeColorLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        darkThemeColorLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                darkThemeColorLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(30, 300, 40, 40);
+        getContentPane().add(darkThemeColorLabel);
+        darkThemeColorLabel.setBounds(30, 300, 40, 40);
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
@@ -220,12 +197,12 @@ public class SettingsPage extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 150, 60, 20);
 
-        jLabel2.setFont(new java.awt.Font("Arial Nova", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Settings");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 10, 280, 20);
+        settingsLabel.setFont(new java.awt.Font("Arial Nova", 0, 14)); // NOI18N
+        settingsLabel.setForeground(new java.awt.Color(204, 204, 204));
+        settingsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        settingsLabel.setText("Settings");
+        getContentPane().add(settingsLabel);
+        settingsLabel.setBounds(10, 10, 280, 20);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize.png"))); // NOI18N
@@ -275,7 +252,7 @@ public class SettingsPage extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 300, 518);
 
-        colorPanelSettings.setBackground(myColor);
+        colorPanelSettings.setBackground(backgroundColor);
 
         javax.swing.GroupLayout colorPanelSettingsLayout = new javax.swing.GroupLayout(colorPanelSettings);
         colorPanelSettings.setLayout(colorPanelSettingsLayout);
@@ -338,223 +315,57 @@ public class SettingsPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        try {
-            ThemeColor tc = new ThemeColor("green");
-            myColor = backgroundColor;
-            
+    private void greenThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_greenThemeColorLabelMouseClicked
+        ThemeColor tc = new ThemeColor("green");
+    }//GEN-LAST:event_greenThemeColorLabelMouseClicked
+
+    private void lightblueThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lightblueThemeColorLabelMouseClicked
+        ThemeColor tc = new ThemeColor("lightblue");
+    }//GEN-LAST:event_lightblueThemeColorLabelMouseClicked
+
+    private void orangeThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orangeThemeColorLabelMouseClicked
+        ThemeColor tc = new ThemeColor("orange");
+    }//GEN-LAST:event_orangeThemeColorLabelMouseClicked
+
+    private void redThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redThemeColorLabelMouseClicked
+        ThemeColor tc = new ThemeColor("red");
+    }//GEN-LAST:event_redThemeColorLabelMouseClicked
+
+    private void darkThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_darkThemeColorLabelMouseClicked
+        ThemeColor tc = new ThemeColor("dark");
+    }//GEN-LAST:event_darkThemeColorLabelMouseClicked
+
+    private void settingsApplyChangesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsApplyChangesLabelMouseClicked
+        try {                                                       
             java.awt.Window win[] = java.awt.Window.getWindows();
             for(int i=0;i<win.length;i++){
                 win[i].dispose();
             }
             
-            WeatherUI wUI = new WeatherUI();
-            CurrentWeather cW = new CurrentWeather();
-            NextDaysWeather ndw = new NextDaysWeather();
-            WeatherImage wI = new WeatherImage();
-            wUI.setVisible(true);
+            /* CHANGE LOCATION WITH TEXTFIELD */
+            location = jTextField1.getText();
+            api = jTextField3.getText();
             
-            /* Display weather conditions */
-            temperatureLabel.setText(temperature + "°");
-            dateLabel.setText(dateNow);
-            dateLabel.setForeground(textColor);
-            locationLabel.setText(location);
-            locationLabel.setForeground(textColor);
-            descriptionLabel.setText(description);
-            nextDayCondLabel.setText(NextDayWeatherCond);
-            nextDayLabel.setText(nextDay);
-            nextDayTempLabel.setText(nextDayTemp + "°");
-            dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-            nextDayCondLabel1.setText(dayAfterTomorrowCond);
-            nextDayLabel1.setText(dayAfterTomorrow);
-            placeholderLabel.setIcon(placeholder);
-            jLabel12.setForeground(textColor);
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        try {
-            ThemeColor tc = new ThemeColor("lightblue");
-            myColor = backgroundColor;
-            
-            java.awt.Window win[] = java.awt.Window.getWindows();
-            for(int i=0;i<win.length;i++){
-                win[i].dispose();
+            try {
+                writeData(location,api,theme);
+            } catch (TransformerException ex) {
+                Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            getCurrentWeather();
+            getTomorrowWeather();
+            getDayAfterTomorrowWeather();
             WeatherUI wUI = new WeatherUI();
-            CurrentWeather cW = new CurrentWeather();
-            NextDaysWeather ndw = new NextDaysWeather();
             WeatherImage wI = new WeatherImage();
+            displayWeather();
             wUI.setVisible(true);
             
-            /* Display weather conditions */
-            temperatureLabel.setText(temperature + "°");
-            dateLabel.setText(dateNow);
-            dateLabel.setForeground(textColor);
-            locationLabel.setText(location);
-            locationLabel.setForeground(textColor);
-            descriptionLabel.setText(description);
-            nextDayCondLabel.setText(NextDayWeatherCond);
-            nextDayLabel.setText(nextDay);
-            nextDayTempLabel.setText(nextDayTemp + "°");
-            dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-            nextDayCondLabel1.setText(dayAfterTomorrowCond);
-            nextDayLabel1.setText(dayAfterTomorrow);
-            placeholderLabel.setIcon(placeholder);
-            jLabel12.setForeground(textColor);
-            
         } catch (InterruptedException ex) {
             Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        try {
-            ThemeColor tc = new ThemeColor("orange");
-            myColor = backgroundColor;
-            
-            java.awt.Window win[] = java.awt.Window.getWindows();
-            for(int i=0;i<win.length;i++){
-                win[i].dispose();
-            }
-            
-            WeatherUI wUI = new WeatherUI();
-            CurrentWeather cW = new CurrentWeather();
-            NextDaysWeather ndw = new NextDaysWeather();
-            WeatherImage wI = new WeatherImage();
-            wUI.setVisible(true);
-            
-            /* Display weather conditions */
-            temperatureLabel.setText(temperature + "°");
-            dateLabel.setText(dateNow);
-            dateLabel.setForeground(textColor);
-            locationLabel.setText(location);
-            locationLabel.setForeground(textColor);
-            descriptionLabel.setText(description);
-            nextDayCondLabel.setText(NextDayWeatherCond);
-            nextDayLabel.setText(nextDay);
-            nextDayTempLabel.setText(nextDayTemp + "°");
-            dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-            nextDayCondLabel1.setText(dayAfterTomorrowCond);
-            nextDayLabel1.setText(dayAfterTomorrow);
-            placeholderLabel.setIcon(placeholder);
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        try {
-            ThemeColor tc = new ThemeColor("red");
-            myColor = backgroundColor;
-            
-            java.awt.Window win[] = java.awt.Window.getWindows();
-            for(int i=0;i<win.length;i++){
-                win[i].dispose();
-            }
-            
-            WeatherUI wUI = new WeatherUI();
-            CurrentWeather cW = new CurrentWeather();
-            NextDaysWeather ndw = new NextDaysWeather();
-            WeatherImage wI = new WeatherImage();
-            wUI.setVisible(true);
-            
-            /* Display weather conditions */
-            temperatureLabel.setText(temperature + "°");
-            dateLabel.setText(dateNow);
-            dateLabel.setForeground(textColor);
-            locationLabel.setText(location);
-            locationLabel.setForeground(textColor);
-            descriptionLabel.setText(description);
-            nextDayCondLabel.setText(NextDayWeatherCond);
-            nextDayLabel.setText(nextDay);
-            nextDayTempLabel.setText(nextDayTemp + "°");
-            dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-            nextDayCondLabel1.setText(dayAfterTomorrowCond);
-            nextDayLabel1.setText(dayAfterTomorrow);
-            placeholderLabel.setIcon(placeholder);
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        try {
-            ThemeColor tc = new ThemeColor("dark");
-            myColor = backgroundColor;
-            
-            java.awt.Window win[] = java.awt.Window.getWindows();
-            for(int i=0;i<win.length;i++){
-                win[i].dispose();
-            }
-            
-            WeatherUI wUI = new WeatherUI();
-            CurrentWeather cW = new CurrentWeather();
-            NextDaysWeather ndw = new NextDaysWeather();
-            WeatherImage wI = new WeatherImage();
-            wUI.setVisible(true);
-            
-            /* Display weather conditions */
-            temperatureLabel.setText(temperature + "°");
-            dateLabel.setText(dateNow);
-            dateLabel.setForeground(textColor);
-            locationLabel.setText(location);
-            locationLabel.setForeground(textColor);
-            descriptionLabel.setText(description);
-            nextDayCondLabel.setText(NextDayWeatherCond);
-            nextDayLabel.setText(nextDay);
-            nextDayTempLabel.setText(nextDayTemp + "°");
-            dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-            nextDayCondLabel1.setText(dayAfterTomorrowCond);
-            nextDayLabel1.setText(dayAfterTomorrow);
-            placeholderLabel.setIcon(placeholder);
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        java.awt.Window win[] = java.awt.Window.getWindows(); 
-        for(int i=0;i<win.length;i++){ 
-        win[i].dispose(); 
-        }
-        
-        /* CHANGE LOCATION WITH TEXTFIELD */
-        myLocation = jTextField1.getText();
-        System.out.println("weather for: " + myLocation + ".");
-        
-        WeatherUI wUI = new WeatherUI();
-        CurrentWeather cW = new CurrentWeather();
-        NextDaysWeather ndw = new NextDaysWeather();
-        try {
-            WeatherImage wI = new WeatherImage();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        wUI.setVisible(true);
-        
-        temperatureLabel.setText(temperature + "°");
-        dateLabel.setText(dateNow);
-        locationLabel.setText(location);
-        descriptionLabel.setText(description);
-        nextDayCondLabel.setText(NextDayWeatherCond);
-        nextDayLabel.setText(nextDay);
-        
-        nextDayTempLabel.setText(nextDayTemp + "°");
-        dayAfterTomorrowTempLabel.setText(dayAfterTomorrowTemp + "°");
-        
-        nextDayCondLabel1.setText(dayAfterTomorrowCond);
-        nextDayLabel1.setText(dayAfterTomorrow);
-        
-        placeholderLabel.setIcon(redPlaceholder);
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }//GEN-LAST:event_settingsApplyChangesLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -594,21 +405,21 @@ public class SettingsPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLabel;
     public static javax.swing.JPanel colorPanelSettings;
+    private javax.swing.JLabel darkThemeColorLabel;
+    private javax.swing.JLabel greenThemeColorLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lightblueThemeColorLabel;
+    private javax.swing.JLabel orangeThemeColorLabel;
+    private javax.swing.JLabel redThemeColorLabel;
+    private javax.swing.JLabel settingsApplyChangesLabel;
+    public static javax.swing.JLabel settingsLabel;
     // End of variables declaration//GEN-END:variables
 }

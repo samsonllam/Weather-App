@@ -7,8 +7,7 @@ package weather.app;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import static weather.app.WeatherApp.playMusic;
-import static weather.app.WeatherHolder.*;
+import static weather.app.WeatherApp.*;
 import static weather.app.WeatherUI.gifLabel;
 import static weather.app.WeatherUI.imageLabel;
 import static weather.app.WeatherUI.nextDayImage;
@@ -36,7 +35,7 @@ public class WeatherImage {
         ImageIcon snowGif = new ImageIcon("resources/weather_gifs/snow.gif");
         
         /* Current day weather image */
-        switch(description){
+        switch(currentDescription){
             /* Thunderstorm */
             case "thunderstorm with light rain": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
             case "thunderstorm with rain": imageLabel.setIcon(thunderIcon); gifLabel.setIcon(thunderGif); playMusic("thunder"); break;
@@ -119,7 +118,7 @@ public class WeatherImage {
         Icon mistIconBlack = new ImageIcon("resources/weather_icons/mist_black.png");
         
         /* Tomorrow weather image */
-        switch(NextDayWeatherCond){
+        switch(nextDayDescription){
             /* Thunderstorm */
             case "thunderstorm with light rain": nextDayImage.setIcon(thunderIconBlack); break;
             case "thunderstorm with rain": nextDayImage.setIcon(thunderIconBlack); break;
@@ -191,7 +190,7 @@ public class WeatherImage {
         }
         
         /* Day after tomorrow weather image */
-        switch(dayAfterTomorrowCond){
+        switch(dayAfterTomorrowDescription){
             /* Thunderstorm */
             case "thunderstorm with light rain": nextDayImage1.setIcon(thunderIconBlack); break;
             case "thunderstorm with rain": nextDayImage1.setIcon(thunderIconBlack); break;

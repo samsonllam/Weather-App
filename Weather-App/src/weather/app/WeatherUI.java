@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import static weather.app.ThemeColor.backgroundColor;
 import static weather.app.WeatherApp.screenHeight;
 import static weather.app.WeatherApp.screenWidth;
 
@@ -15,7 +16,6 @@ public class WeatherUI extends javax.swing.JFrame {
 
     int mouseX;
     int mouseY;
-    public static Color myColor = new Color(0,102,255);
     /**
      * Creates new form WeatherUI
      */
@@ -193,7 +193,7 @@ public class WeatherUI extends javax.swing.JFrame {
         dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         dateLabel.setText("date");
         getContentPane().add(dateLabel);
-        dateLabel.setBounds(160, 160, 90, 20);
+        dateLabel.setBounds(160, 160, 130, 20);
 
         imageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(imageLabel);
@@ -224,7 +224,7 @@ public class WeatherUI extends javax.swing.JFrame {
         getContentPane().add(gifLabel);
         gifLabel.setBounds(0, 0, 300, 330);
 
-        colorPanelMain.setBackground(myColor);
+        colorPanelMain.setBackground(backgroundColor);
 
         javax.swing.GroupLayout colorPanelMainLayout = new javax.swing.GroupLayout(colorPanelMain);
         colorPanelMain.setLayout(colorPanelMainLayout);
