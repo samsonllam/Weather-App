@@ -3,7 +3,6 @@ package weather.app;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import static weather.app.ThemeColor.backgroundColor;
 import static weather.app.WeatherApp.screenHeight;
 import static weather.app.WeatherApp.screenWidth;
@@ -14,8 +13,10 @@ import static weather.app.WeatherApp.screenWidth;
  */
 public class WeatherUI extends javax.swing.JFrame {
 
-    int mouseX;
-    int mouseY;
+    public static int cordsX;
+    public static int cordsY;
+    public static int mouseX;
+    public static int mouseY;
     /**
      * Creates new form WeatherUI
      */
@@ -28,9 +29,9 @@ public class WeatherUI extends javax.swing.JFrame {
         this.setTitle("WeatherApp");
         this.setDefaultCloseOperation(3);
         this.setBackground(new Color(1.0f,1.0f,1.0f,0f));
-        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/weather_icons/app_icon.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/weather_icons/app_icon.png")));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +42,7 @@ public class WeatherUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        minimizeLabel = new javax.swing.JLabel();
         dayAfterTomorrowTempLabel = new javax.swing.JLabel();
         nextDayTempLabel = new javax.swing.JLabel();
         placeholderLabel = new javax.swing.JLabel();
@@ -53,7 +54,7 @@ public class WeatherUI extends javax.swing.JFrame {
         nextDayLabel = new javax.swing.JLabel();
         nextDayImage = new javax.swing.JLabel();
         temperatureLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        menuLabel = new javax.swing.JLabel();
         closeLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -69,21 +70,21 @@ public class WeatherUI extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        minimizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize.png"))); // NOI18N
+        minimizeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                minimizeLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel7MouseEntered(evt);
+                minimizeLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel7MouseExited(evt);
+                minimizeLabelMouseExited(evt);
             }
         });
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(250, 10, 20, 20);
+        getContentPane().add(minimizeLabel);
+        minimizeLabel.setBounds(250, 10, 20, 20);
 
         dayAfterTomorrowTempLabel.setFont(new java.awt.Font("Arial Nova", 0, 10)); // NOI18N
         dayAfterTomorrowTempLabel.setForeground(new java.awt.Color(102, 102, 102));
@@ -153,16 +154,16 @@ public class WeatherUI extends javax.swing.JFrame {
         getContentPane().add(temperatureLabel);
         temperatureLabel.setBounds(160, 80, 130, 60);
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu (1).png"))); // NOI18N
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu (1).png"))); // NOI18N
+        menuLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                menuLabelMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 10, 20, 20);
+        getContentPane().add(menuLabel);
+        menuLabel.setBounds(10, 10, 20, 20);
 
         closeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_button.png"))); // NOI18N
@@ -247,14 +248,14 @@ public class WeatherUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeLabelMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void menuLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLabelMouseClicked
         SettingsPage settings = new SettingsPage();
         settings.setVisible(true);
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_menuLabelMouseClicked
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        int cordsX = evt.getXOnScreen();
-        int cordsY = evt.getYOnScreen();
+        cordsX = evt.getXOnScreen();
+        cordsY = evt.getYOnScreen();
         
         this.setLocation( cordsX-mouseX, cordsY-mouseY);
     }//GEN-LAST:event_jLabel1MouseDragged
@@ -264,29 +265,25 @@ public class WeatherUI extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
         this.setExtendedState(Frame.ICONIFIED);
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }//GEN-LAST:event_minimizeLabelMouseClicked
 
     private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
-        ImageIcon closeHover = new ImageIcon("resources/images/close_button_hover.png");
-        closeLabel.setIcon(closeHover);
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_button_hover.png")));
     }//GEN-LAST:event_closeLabelMouseEntered
 
     private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
-        ImageIcon closeIcon = new ImageIcon("resources/images/close_button.png");
-        closeLabel.setIcon(closeIcon);
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_button.png")));
     }//GEN-LAST:event_closeLabelMouseExited
 
-    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        ImageIcon minimizeHover = new ImageIcon("resources/images/minimize_hover.png");
-        jLabel7.setIcon(minimizeHover);
-    }//GEN-LAST:event_jLabel7MouseEntered
+    private void minimizeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseEntered
+        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize_hover.png")));
+    }//GEN-LAST:event_minimizeLabelMouseEntered
 
-    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        ImageIcon minimizeIcon = new ImageIcon("resources/images/minimize.png");
-        jLabel7.setIcon(minimizeIcon);
-    }//GEN-LAST:event_jLabel7MouseExited
+    private void minimizeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseExited
+        minimizeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize.png")));
+    }//GEN-LAST:event_minimizeLabelMouseExited
 
     /**
      * @param args the command line arguments
@@ -316,10 +313,8 @@ public class WeatherUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WeatherUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new WeatherUI().setVisible(true);
         });
     }
     
@@ -328,7 +323,7 @@ public class WeatherUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel closeLabel;
+    private static javax.swing.JLabel closeLabel;
     public static javax.swing.JPanel colorPanelMain;
     public static javax.swing.JLabel dateLabel;
     public static javax.swing.JLabel dayAfterTomorrowTempLabel;
@@ -336,11 +331,11 @@ public class WeatherUI extends javax.swing.JFrame {
     public static javax.swing.JLabel gifLabel;
     public static javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JLabel locationLabel;
+    private static javax.swing.JLabel menuLabel;
+    private static javax.swing.JLabel minimizeLabel;
     public static javax.swing.JLabel nextDayCondLabel;
     public static javax.swing.JLabel nextDayCondLabel1;
     public static javax.swing.JLabel nextDayImage;

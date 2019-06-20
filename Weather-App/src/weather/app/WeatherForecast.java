@@ -30,6 +30,7 @@ public class WeatherForecast {
     static int tomorrowForecastNumber, dayAfterTomorrowForecastNumber;
 
     public static void getCurrentWeather() {
+        System.out.print("--> Importing weather forecast. ");
         OpenWeatherMapManager openWeatherManager = new OpenWeatherMapManager(api);
         WeatherRequester weatherRequester = openWeatherManager.getWeatherRequester();
 
@@ -44,16 +45,20 @@ public class WeatherForecast {
 
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("EEEEEEEE, MMM, dd", java.util.Locale.ENGLISH);
-        currentDate = dateFormat.format(date).toString();
+        currentDate = dateFormat.format(date);
+        
+        location = weatherResponse.getCityName();
         
         float temporaryTemperature = weatherResponse.getTemperature();
         currentTemperature = df.format(temporaryTemperature);
 
         //location = weatherResponse.getCityName().toString();
-        currentDescription = weatherResponse.getWeatherDescription().toString();
+        currentDescription = weatherResponse.getWeatherDescription();
+        System.out.println("--> IMPORTED CURRENT");
     }
 
     public static void getTomorrowWeather() {
+        System.out.print("--> Importing weather forecast. ");
         Calendar calendar = Calendar.getInstance();
         DateFormat nextDayFormat = new SimpleDateFormat("EEE", java.util.Locale.ENGLISH);
 
@@ -180,7 +185,7 @@ public class WeatherForecast {
         /* tomorrow weather description */
         HourlyForecast.Forecast nextForecast = s.get(tomorrowForecastNumber);
         String nextDayForecast = String.valueOf(nextForecast);
-        String[] condFromString = nextDayForecast.toString().split(";");
+        String[] condFromString = nextDayForecast.split(";");
         nextDayDescription = condFromString[1];
         nextDayDescription = nextDayDescription.substring(10);
 
@@ -188,14 +193,16 @@ public class WeatherForecast {
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(1);
         String nextDayTemperature1 = String.valueOf(nextForecast);
-        String[] temporaryNextDayTemperature = nextDayForecast.toString().split(";");
+        String[] temporaryNextDayTemperature = nextDayTemperature1.split(";");
         nextDayTemperature = temporaryNextDayTemperature[2].substring(14);
         nextDayTemperature = nextDayTemperature.replace(" ℃", "");
         float tempe = Float.valueOf(nextDayTemperature);
         nextDayTemperature = df.format(tempe);
+        System.out.println("--> IMPORTED TOMORROW");
     }
 
     public static void getDayAfterTomorrowWeather() {
+        System.out.print("--> Importing weather forecast. ");
         Calendar calendar = Calendar.getInstance();
         DateFormat nextDayFormat = new SimpleDateFormat("EEE", java.util.Locale.ENGLISH);
 
@@ -327,17 +334,18 @@ public class WeatherForecast {
         /* dayAfterTomorrow weather description */
         HourlyForecast.Forecast tomorrow = s.get(dayAfterTomorrowForecastNumber);
         String tomorrowForecast = String.valueOf(tomorrow);
-        String[] condFromString2 = tomorrowForecast.toString().split(";");
+        String[] condFromString2 = tomorrowForecast.split(";");
         dayAfterTomorrowDescription = condFromString2[1];
         dayAfterTomorrowDescription = dayAfterTomorrowDescription.substring(10);
 
         /* day after tomorrow weather temp */
         String dayAfterTomorrow1 = String.valueOf(tomorrow);
-        String[] temporaryDayAfterTomorrowTempe = tomorrowForecast.toString().split(";");
+        String[] temporaryDayAfterTomorrowTempe = tomorrowForecast.split(";");
         dayAfterTomorrowTemperature = temporaryDayAfterTomorrowTempe[2].substring(14);
         dayAfterTomorrowTemperature = dayAfterTomorrowTemperature.replace(" ℃", "");
         float tempee = Float.valueOf(dayAfterTomorrowTemperature);
         dayAfterTomorrowTemperature = df.format(tempee);
+        System.out.println("--> IMPORTED DAYAFTERTOMORROW");
     }
 
     public WeatherForecast() {

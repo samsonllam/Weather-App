@@ -26,35 +26,35 @@ public class ThemeColor {
                 theme = "lightblue";
                 backgroundColor = new Color(0, 102, 255);
                 textColor = new Color(51, 153, 255);
-                placeholder = new ImageIcon("resources/images/placeholder.png");
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
                 break;
             }
             case "dark": {
                 theme = "dark";
                 backgroundColor = new Color(29, 26, 49);
                 textColor = new Color(249, 134, 134);
-                placeholder = new ImageIcon("resources/images/placeholder_red.png");
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_red.png"));
                 break;
             }
             case "green": {
                 theme = "green";
                 backgroundColor = new Color(0, 204, 51);
                 textColor = new Color(0, 242, 60);
-                placeholder = new ImageIcon("resources/images/placeholder_green.png");
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_green.png"));
                 break;
             }
             case "red": {
                 theme = "red";
                 backgroundColor = new Color(255, 51, 51);
                 textColor = new Color(249, 134, 134);
-                placeholder = new ImageIcon("resources/images/placeholder_red.png");
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_red.png"));
                 break;
             }
             case "orange": {
                 theme = "orange";
                 backgroundColor = new Color(255, 102, 0);
                 textColor = new Color(255, 166, 107);
-                placeholder = new ImageIcon("resources/images/placeholder_orange.png");  
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_orange.png"));
                 break;
             }
         }

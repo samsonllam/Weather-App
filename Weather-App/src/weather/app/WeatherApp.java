@@ -1,14 +1,20 @@
 package weather.app;
 
+import com.github.prominence.openweathermap.api.exception.DataNotFoundException;
+import com.github.prominence.openweathermap.api.exception.InvalidAuthTokenException;
 import jaco.mp3.player.MP3Player;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import static oracle.jrockit.jfr.events.Bits.intValue;
+import static sun.audio.AudioPlayer.player;
 import static weather.app.Data.*;
 import static weather.app.ThemeColor.placeholder;
 import static weather.app.ThemeColor.textColor;
@@ -20,7 +26,7 @@ import static weather.app.WeatherUI.*;
  * @author Kamil
  */
 public class WeatherApp {
-
+    
     public static String location;
     public static String api;
     public static String theme;
@@ -40,14 +46,15 @@ public class WeatherApp {
     
     public static int screenHeight;
     public static int screenWidth;
-
-    public static void main(String[] args) throws InterruptedException {
+    
+    public static void main(String[] args) throws InterruptedException, ParserConfigurationException, TransformerException, IOException {
         try {
             /* Screen size which is used to center apps frame */
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             screenHeight = intValue(screenSize.getHeight());
             screenWidth = intValue(screenSize.getWidth());
             
+            checkForXMLFile();
             getData();
             ThemeColor tc = new ThemeColor(theme);
             getCurrentWeather();
@@ -58,11 +65,17 @@ public class WeatherApp {
             WeatherImage wI = new WeatherImage();
             displayWeather();
             wUI.setVisible(true);
-            
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(WeatherApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(WeatherApp.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }catch(DataNotFoundException ex){
+            System.out.print("--> ERROR");
+            System.out.println("\n" + "\u001B[31m" + "[ERROR]: Data for provided parameters wasn't found. Please, check your location.");
+            SettingsPage sp = new SettingsPage();
+            sp.setVisible(true);
+        } catch (InvalidAuthTokenException ex) {
+            System.out.print("--> ERROR");
+            System.out.println("\n" + "\u001B[31m" + "[ERROR]: Api key is incorrect. Please, check your api.");
+            SettingsPage sp = new SettingsPage();
+            sp.setVisible(true);
         }
     }
 
@@ -86,9 +99,13 @@ public class WeatherApp {
     public static void playMusic(String weather) {
         
         switch(weather){
-            case "rain": { new MP3Player(new File("rain.mp3")).play(); break; }
-            case "thunder": { new MP3Player(new File("thunder.mp3")).play(); break; }
-            case "jingle": { new MP3Player(new File("jingle.mp3")).play(); break; }
+            case "rain": { new MP3Player(new File("resources/weather_sounds/rain.mp3")).play(); break; }
+            case "thunder": { new MP3Player(new File("resources/weather_sounds/thunder.mp3")).play(); break; }
+            case "jingle": { new MP3Player(new File("resources/weather_sounds/jingle.mp3")).play(); break; }
         }
+    }
+
+    public WeatherApp() {
+
     }
 }

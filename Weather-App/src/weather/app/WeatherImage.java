@@ -20,19 +20,19 @@ import static weather.app.WeatherUI.nextDayImage1;
 public class WeatherImage {
     
     public WeatherImage() throws InterruptedException{        
-        Icon sunIcon = new ImageIcon("resources/weather_icons/sun.png");
-        Icon moonIcon = new ImageIcon("resources/weather_icons/moon.png");
-        Icon thunderIcon = new ImageIcon("resources/weather_icons/thunderstorm.png");
-        Icon rainIcon = new ImageIcon("resources/weather_icons/rain.png");
-        Icon drizzleIcon = new ImageIcon("resources/weather_icons/drizzle.png");
-        Icon snowIcon = new ImageIcon("resources/weather_icons/snow.png");
-        Icon fewCloudsIcon = new ImageIcon("resources/weather_icons/few_clouds.png");
-        Icon scatteredCloudsIcon = new ImageIcon("resources/weather_icons/scattered_clouds.png");
-        Icon brokenCloudsImage = new ImageIcon("resources/weather_icons/broken_clouds.png");
-        Icon mistIcon = new ImageIcon("resources/weather_icons/mist.png");
-        ImageIcon raindropGif = new ImageIcon("resources/weather_gifs/raindrop.gif");
-        ImageIcon thunderGif = new ImageIcon("resources/weather_gifs/thunder.gif");
-        ImageIcon snowGif = new ImageIcon("resources/weather_gifs/snow.gif");
+        Icon sunIcon = new ImageIcon(getClass().getResource("/weather_icons/sun.png"));
+        Icon moonIcon = new ImageIcon(getClass().getResource("/weather_icons/moon.png"));
+        Icon thunderIcon = new ImageIcon(getClass().getResource("/weather_icons/thunderstorm.png"));
+        Icon rainIcon = new ImageIcon(getClass().getResource("/weather_icons/rain.png"));
+        Icon drizzleIcon = new ImageIcon(getClass().getResource("/weather_icons/drizzle.png"));
+        Icon snowIcon = new ImageIcon(getClass().getResource("/weather_icons/snow.png"));
+        Icon fewCloudsIcon = new ImageIcon(getClass().getResource("/weather_icons/few_clouds.png"));
+        Icon scatteredCloudsIcon = new ImageIcon(getClass().getResource("/weather_icons/scattered_clouds.png"));
+        Icon brokenCloudsImage = new ImageIcon(getClass().getResource("/weather_icons/broken_clouds.png"));
+        Icon mistIcon = new ImageIcon(getClass().getResource("/weather_icons/mist.png"));
+        Icon raindropGif = new ImageIcon(getClass().getResource("/weather_gifs/raindrop.gif"));
+        Icon thunderGif = new ImageIcon(getClass().getResource("/weather_gifs/thunder.gif"));
+        Icon snowGif = new ImageIcon(getClass().getResource("/weather_gifs/snow.gif"));
         
         /* Current day weather image */
         switch(currentDescription){
@@ -58,7 +58,7 @@ public class WeatherImage {
             case "shower rain and drizzle": imageLabel.setIcon(drizzleIcon); break;
             case "heavy shower rain and drizzle": imageLabel.setIcon(drizzleIcon); break;
             case "shower drizzle": imageLabel.setIcon(drizzleIcon); break;
-            
+
             /* Snow */
             case "light snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
             case "Snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
@@ -85,8 +85,8 @@ public class WeatherImage {
             case "ragged shower rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;
             
             /* Clear */ 
-            case "clear sky": if(dayOrNight == "day"){imageLabel.setIcon(sunIcon);break;}
-            else if(dayOrNight == "night"){imageLabel.setIcon(moonIcon);} break;
+            case "clear sky": if("day".equals(dayOrNight)){imageLabel.setIcon(sunIcon);break;}
+            else if("night".equals(dayOrNight)){imageLabel.setIcon(moonIcon);} break;
             
             /* Clouds */
             case "few clouds": imageLabel.setIcon(fewCloudsIcon); break;
@@ -107,15 +107,15 @@ public class WeatherImage {
             case "tornado": imageLabel.setIcon(mistIcon); break;
         }
         
-        Icon sunIconBlack = new ImageIcon("resources/weather_icons/sun_black.png");
-        Icon thunderIconBlack = new ImageIcon("resources/weather_icons/thunderstorm_black.png");
-        Icon rainIconBlack = new ImageIcon("resources/weather_icons/rain_black.png");
-        Icon drizzleIconBlack = new ImageIcon("resources/weather_icons/drizzle_black.png");
-        Icon snowIconBlack = new ImageIcon("resources/weather_icons/snow_black.png");
-        Icon fewCloudsIconBlack = new ImageIcon("resources/weather_icons/few_clouds_black.png");
-        Icon scatteredCloudsIconBlack = new ImageIcon("resources/weather_icons/scattered_clouds_black.png");
-        Icon brokenCloudsImageBlack = new ImageIcon("resources/weather_icons/broken_clouds_black.png");
-        Icon mistIconBlack = new ImageIcon("resources/weather_icons/mist_black.png");
+        Icon sunIconBlack = new ImageIcon(getClass().getResource("/weather_icons/sun_black.png"));
+        Icon thunderIconBlack = new ImageIcon(getClass().getResource("/weather_icons/thunderstorm_black.png"));
+        Icon rainIconBlack = new ImageIcon(getClass().getResource("/weather_icons/rain_black.png"));
+        Icon drizzleIconBlack = new ImageIcon(getClass().getResource("/weather_icons/drizzle_black.png"));
+        Icon snowIconBlack = new ImageIcon(getClass().getResource("/weather_icons/snow_black.png"));
+        Icon fewCloudsIconBlack = new ImageIcon(getClass().getResource("/weather_icons/few_clouds_black.png"));
+        Icon scatteredCloudsIconBlack = new ImageIcon(getClass().getResource("/weather_icons/scattered_clouds_black.png"));
+        Icon brokenCloudsImageBlack = new ImageIcon(getClass().getResource("/weather_icons/broken_clouds_black.png"));
+        Icon mistIconBlack = new ImageIcon(getClass().getResource("/weather_icons/mist_black.png"));
         
         /* Tomorrow weather image */
         switch(nextDayDescription){

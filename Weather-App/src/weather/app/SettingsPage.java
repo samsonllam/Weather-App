@@ -5,11 +5,14 @@
  */
 package weather.app;
 
+import com.github.prominence.openweathermap.api.exception.DataNotFoundException;
+import com.github.prominence.openweathermap.api.exception.InvalidAuthTokenException;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.border.MatteBorder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -19,16 +22,17 @@ import static weather.app.ThemeColor.*;
 import static weather.app.WeatherForecast.getCurrentWeather;
 import static weather.app.WeatherForecast.getDayAfterTomorrowWeather;
 import static weather.app.WeatherForecast.getTomorrowWeather;
+import static weather.app.WeatherUI.cordsX;
+import static weather.app.WeatherUI.cordsY;
+import static weather.app.WeatherUI.mouseX;
+import static weather.app.WeatherUI.mouseY;
 
 /**
  *
  * @author Kamil
  */
 public class SettingsPage extends javax.swing.JFrame {
-
-    int mouseX;
-    int mouseY;
-    
+   
     Color textfieldline = new Color(234,235,237);
     
     /**
@@ -47,6 +51,7 @@ public class SettingsPage extends javax.swing.JFrame {
         jTextField1.setBorder(new MatteBorder(0, 0, 1, 0, textfieldline));
         jTextField3.setText(api);
         jTextField3.setBorder(new MatteBorder(0, 0, 1, 0, textfieldline));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/weather_icons/app_icon.png")));
     }
 
     /**
@@ -272,8 +277,8 @@ public class SettingsPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        int cordsX = evt.getXOnScreen();
-        int cordsY = evt.getYOnScreen();
+        cordsX = evt.getXOnScreen();
+        cordsY = evt.getYOnScreen();
 
         this.setLocation( cordsX-mouseX, cordsY-mouseY);
     }//GEN-LAST:event_jLabel1MouseDragged
@@ -288,13 +293,11 @@ public class SettingsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_closeLabelMouseClicked
 
     private void closeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseEntered
-        ImageIcon closeHover = new ImageIcon("resources/images/close_button_hover.png");
-        closeLabel.setIcon(closeHover);
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_button_hover.png")));
     }//GEN-LAST:event_closeLabelMouseEntered
 
     private void closeLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseExited
-        ImageIcon closeIcon = new ImageIcon("resources/images/close_button.png");
-        closeLabel.setIcon(closeIcon);
+        closeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_button.png")));
     }//GEN-LAST:event_closeLabelMouseExited
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
@@ -302,13 +305,11 @@ public class SettingsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        ImageIcon minimizeHover = new ImageIcon("resources/images/minimize_hover.png");
-        jLabel7.setIcon(minimizeHover);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize_hover.png")));
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        ImageIcon minimizeIcon = new ImageIcon("resources/images/minimize.png");
-        jLabel7.setIcon(minimizeIcon);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize.png")));
     }//GEN-LAST:event_jLabel7MouseExited
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -317,29 +318,54 @@ public class SettingsPage extends javax.swing.JFrame {
 
     private void greenThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_greenThemeColorLabelMouseClicked
         ThemeColor tc = new ThemeColor("green");
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green_click.png")));
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png")));
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png")));
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png")));
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png")));
     }//GEN-LAST:event_greenThemeColorLabelMouseClicked
 
     private void lightblueThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lightblueThemeColorLabelMouseClicked
         ThemeColor tc = new ThemeColor("lightblue");
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png")));
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_lightblue_click.png")));
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png")));
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png")));
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png")));
     }//GEN-LAST:event_lightblueThemeColorLabelMouseClicked
 
     private void orangeThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orangeThemeColorLabelMouseClicked
         ThemeColor tc = new ThemeColor("orange");
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png")));
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png")));
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange_click.png")));
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png")));
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png")));
     }//GEN-LAST:event_orangeThemeColorLabelMouseClicked
 
     private void redThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redThemeColorLabelMouseClicked
         ThemeColor tc = new ThemeColor("red");
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png")));
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png")));
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png")));
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red_click.png")));
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark.png")));
     }//GEN-LAST:event_redThemeColorLabelMouseClicked
 
     private void darkThemeColorLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_darkThemeColorLabelMouseClicked
         ThemeColor tc = new ThemeColor("dark");
+        greenThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_green.png")));
+        lightblueThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_blue.png")));
+        orangeThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_orange.png")));
+        redThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_red.png")));
+        darkThemeColorLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/theme_color_dark_click.png")));
     }//GEN-LAST:event_darkThemeColorLabelMouseClicked
 
     private void settingsApplyChangesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsApplyChangesLabelMouseClicked
         try {                                                       
             java.awt.Window win[] = java.awt.Window.getWindows();
-            for(int i=0;i<win.length;i++){
-                win[i].dispose();
+            for (Window win1 : win) {
+                win1.dispose();
             }
             
             /* CHANGE LOCATION WITH TEXTFIELD */
@@ -348,9 +374,7 @@ public class SettingsPage extends javax.swing.JFrame {
             
             try {
                 writeData(location,api,theme);
-            } catch (TransformerException ex) {
-                Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParserConfigurationException ex) {
+            } catch (TransformerException | ParserConfigurationException ex) {
                 Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -364,6 +388,17 @@ public class SettingsPage extends javax.swing.JFrame {
             
         } catch (InterruptedException ex) {
             Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch(DataNotFoundException ex){
+            System.out.print("--> ERROR");
+            System.out.println("\n" + "\u001B[31m" + "[ERROR]: Data for provided parameters wasn't found. Please, check your location.");
+            SettingsPage sp = new SettingsPage();
+            sp.setVisible(true);
+        } catch (InvalidAuthTokenException ex) {
+            System.out.print("--> ERROR");
+            System.out.println("\n" + "\u001B[31m" + "[ERROR]: Api key is incorrect. Please, check your api.");
+            SettingsPage sp = new SettingsPage();
+            sp.setVisible(true);
         }
     }//GEN-LAST:event_settingsApplyChangesLabelMouseClicked
 
@@ -383,22 +418,16 @@ public class SettingsPage extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SettingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SettingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SettingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SettingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SettingsPage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new SettingsPage().setVisible(true);
         });
     }
 
