@@ -64,9 +64,6 @@ public class WeatherApp {
             WeatherImage wI = new WeatherImage();
             displayWeather();
             wUI.setVisible(true);
-            
-            /* DELETE */
-            getCurrentWeatherDetails();
         
         }catch(DataNotFoundException ex){
             System.out.print("--> ERROR");

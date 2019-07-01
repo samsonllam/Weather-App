@@ -85,6 +85,7 @@ public class WeatherUI extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/details.png"))); // NOI18N
         jLabel2.setLabelFor(closeLabel);
         jLabel2.setText("Weather details");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
