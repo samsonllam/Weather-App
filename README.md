@@ -41,6 +41,14 @@ Window      | Main      | Settings  | Weather details |
 - Start IDE, for example Netbeans and select File > Open > Project.
 - Press Ctrl+Shift+B, or select Build > Clean & Build Project.
 
+## Download files
+
+| File type | Link |
+| --- | --- |
+| .jar | [Download](https://github.com/kamillobinski/Weather-App/releases/download/v1.0/Weather-App-v1.0-jar.rar) |
+| .zip (all project files) | [Download](https://github.com/kamillobinski/Weather-App/releases/download/v1.0/Weather-App.zip) |
+
+
 ## Libraries
 
 - [OpenWeatherMap Api](https://github.com/Prominence/openweathermap-java-api)
