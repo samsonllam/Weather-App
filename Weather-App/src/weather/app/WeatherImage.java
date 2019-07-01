@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import static weather.app.WeatherApp.*;
 import static weather.app.WeatherUI.gifLabel;
 import static weather.app.WeatherUI.imageLabel;
+import static weather.app.WeatherUI.mountainsLabel;
 import static weather.app.WeatherUI.nextDayImage;
 import static weather.app.WeatherUI.nextDayImage1;
 
@@ -33,6 +34,7 @@ public class WeatherImage {
         Icon raindropGif = new ImageIcon(getClass().getResource("/weather_gifs/raindrop.gif"));
         Icon thunderGif = new ImageIcon(getClass().getResource("/weather_gifs/thunder.gif"));
         Icon snowGif = new ImageIcon(getClass().getResource("/weather_gifs/snow.gif"));
+        Icon mountainsWhite = new ImageIcon(getClass().getResource("/backgrounds/mountains_white.png"));
         
         /* Current day weather image */
         switch(currentDescription){
@@ -60,17 +62,17 @@ public class WeatherImage {
             case "shower drizzle": imageLabel.setIcon(drizzleIcon); break;
 
             /* Snow */
-            case "light snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Heavy snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Light shower sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Shower sleet": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Light rain and snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Rain and snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Light shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
-            case "Heavy shower snow": imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "light snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Heavy snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Sleet": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light shower sleet": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Shower sleet": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light rain and snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Rain and snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Light shower snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Shower snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
+            case "Heavy shower snow": mountainsLabel.setIcon(mountainsWhite); imageLabel.setIcon(snowIcon); gifLabel.setIcon(snowGif); playMusic("jingle"); break;
             
             /* Rain */
             case "light rain": imageLabel.setIcon(rainIcon); gifLabel.setIcon(raindropGif); playMusic("rain"); break;

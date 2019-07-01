@@ -3,6 +3,7 @@ package weather.app;
 import com.github.prominence.openweathermap.api.exception.DataNotFoundException;
 import com.github.prominence.openweathermap.api.exception.InvalidAuthTokenException;
 import jaco.mp3.player.MP3Player;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -16,6 +17,8 @@ import static weather.app.ThemeColor.placeholder;
 import static weather.app.ThemeColor.textColor;
 import static weather.app.WeatherForecast.*;
 import static weather.app.WeatherUI.*;
+import static weather.app.SettingsUI.jTextField1;
+import static weather.app.SettingsUI.jTextField3;
 
 /**
  *
@@ -61,24 +64,27 @@ public class WeatherApp {
             WeatherImage wI = new WeatherImage();
             displayWeather();
             wUI.setVisible(true);
+            
+            /* DELETE */
+            getCurrentWeatherDetails();
         
         }catch(DataNotFoundException ex){
             System.out.print("--> ERROR");
             System.out.println("\n" + "\u001B[31m" + "[ERROR]: Data for provided parameters wasn't found. Please, check your location.");
-            SettingsPage sp = new SettingsPage();
+            SettingsUI sp = new SettingsUI();
+            jTextField1.setForeground(Color.red);
             sp.setVisible(true);
         } catch (InvalidAuthTokenException ex) {
             System.out.print("--> ERROR");
             System.out.println("\n" + "\u001B[31m" + "[ERROR]: Api key is incorrect. Please, check your api.");
-            SettingsPage sp = new SettingsPage();
+            SettingsUI sp = new SettingsUI();
+            jTextField3.setForeground(Color.red);
             sp.setVisible(true);
         }
     }
 
     public static void displayWeather(){
         temperatureLabel.setText(currentTemperature + "°");
-        dateLabel.setText(currentDate);
-        dateLabel.setForeground(textColor);
         locationLabel.setText(location);
         locationLabel.setForeground(textColor);
         descriptionLabel.setText(currentDescription);

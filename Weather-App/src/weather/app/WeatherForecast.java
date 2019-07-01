@@ -11,6 +11,10 @@ import com.github.prominence.openweathermap.api.WeatherRequester;
 import com.github.prominence.openweathermap.api.constants.Accuracy;
 import com.github.prominence.openweathermap.api.constants.Language;
 import com.github.prominence.openweathermap.api.constants.Unit;
+import com.github.prominence.openweathermap.api.model.Clouds;
+import com.github.prominence.openweathermap.api.model.Rain;
+import com.github.prominence.openweathermap.api.model.Snow;
+import com.github.prominence.openweathermap.api.model.Wind;
 import com.github.prominence.openweathermap.api.model.response.HourlyForecast;
 import com.github.prominence.openweathermap.api.model.response.Weather;
 import java.text.DateFormat;
@@ -41,7 +45,7 @@ public class WeatherForecast {
                 .getByCityName(location);
 
         DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(1);
+        df.setMaximumFractionDigits(0);
 
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("EEEEEEEE, MMM, dd", java.util.Locale.ENGLISH);
@@ -54,7 +58,7 @@ public class WeatherForecast {
 
         //location = weatherResponse.getCityName().toString();
         currentDescription = weatherResponse.getWeatherDescription();
-        System.out.println("--> IMPORTED CURRENT");
+        System.out.println("--> IMPORTED CURRENT");        
     }
 
     public static void getTomorrowWeather() {
@@ -62,7 +66,7 @@ public class WeatherForecast {
         Calendar calendar = Calendar.getInstance();
         DateFormat nextDayFormat = new SimpleDateFormat("EEE", java.util.Locale.ENGLISH);
 
-        String[] days = new String[]{"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+        String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         nextDay = days[calendar.get(Calendar.DAY_OF_WEEK) - 1];
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
@@ -191,7 +195,7 @@ public class WeatherForecast {
 
         /* tomorrow weather temperature */
         DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(1);
+        df.setMaximumFractionDigits(0);
         String nextDayTemperature1 = String.valueOf(nextForecast);
         String[] temporaryNextDayTemperature = nextDayTemperature1.split(";");
         nextDayTemperature = temporaryNextDayTemperature[2].substring(14);
@@ -206,7 +210,7 @@ public class WeatherForecast {
         Calendar calendar = Calendar.getInstance();
         DateFormat nextDayFormat = new SimpleDateFormat("EEE", java.util.Locale.ENGLISH);
 
-        String[] days = new String[]{"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+        String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         calendar.add(Calendar.DATE, 1);
         dayAfterTomorrow = days[calendar.get(Calendar.DAY_OF_WEEK) - 1];
 
@@ -329,7 +333,7 @@ public class WeatherForecast {
         String al = String.valueOf(s);
 
         DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(1);
+        df.setMaximumFractionDigits(0);
 
         /* dayAfterTomorrow weather description */
         HourlyForecast.Forecast tomorrow = s.get(dayAfterTomorrowForecastNumber);
@@ -348,6 +352,30 @@ public class WeatherForecast {
         System.out.println("--> IMPORTED DAYAFTERTOMORROW");
     }
 
+    public static void getCurrentWeatherDetails() {
+        OpenWeatherMapManager openWeatherManager = new OpenWeatherMapManager(api);
+        WeatherRequester weatherRequester = openWeatherManager.getWeatherRequester();
+
+        Weather weatherResponse = weatherRequester
+                .setLanguage(Language.ENGLISH)
+                .setUnitSystem(Unit.METRIC_SYSTEM)
+                .setAccuracy(Accuracy.ACCURATE)
+                .getByCityName(location);
+
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(0);
+
+        String clouds = weatherResponse.getClouds().toString().substring(12);
+        byte humidity = weatherResponse.getHumidityPercentage();
+        short pressure = weatherResponse.getPressure();
+        Rain rain = weatherResponse.getRain();
+        Snow snow = weatherResponse.getSnow();
+        Wind wind = weatherResponse.getWind();
+        
+        WeatherDetailsUI wdUI = new WeatherDetailsUI(clouds, humidity, pressure, rain, snow, wind);
+        wdUI.setVisible(true);
+    }
+    
     public WeatherForecast() {
 
     }

@@ -19,42 +19,48 @@ public class ThemeColor {
     public static Color backgroundColor;
     public static Color textColor;
     public static Icon placeholder;
+    public static Icon mountains;
 
     public ThemeColor(String themeName) {
         switch (themeName) {
             case "lightblue": {
                 theme = "lightblue";
-                backgroundColor = new Color(0, 102, 255);
-                textColor = new Color(51, 153, 255);
+                backgroundColor = new Color(0, 167, 225);
+                textColor = new Color(255, 255, 255);
                 placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
+                mountains = new ImageIcon(getClass().getResource("/backgrounds/mountains_brown.png"));
                 break;
             }
             case "dark": {
                 theme = "dark";
-                backgroundColor = new Color(29, 26, 49);
-                textColor = new Color(249, 134, 134);
-                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_red.png"));
+                backgroundColor = new Color(46, 80, 119);
+                textColor = new Color(255, 255, 255);
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
+                mountains = new ImageIcon(getClass().getResource("/backgrounds/mountains_brown.png"));
                 break;
             }
             case "green": {
                 theme = "green";
-                backgroundColor = new Color(0, 204, 51);
-                textColor = new Color(0, 242, 60);
-                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_green.png"));
+                backgroundColor = new Color(115, 165, 128);
+                textColor = new Color(255, 255, 255);
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
+                mountains = new ImageIcon(getClass().getResource("/backgrounds/mountains_brown.png"));
                 break;
             }
             case "red": {
                 theme = "red";
-                backgroundColor = new Color(255, 51, 51);
-                textColor = new Color(249, 134, 134);
-                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_red.png"));
+                backgroundColor = new Color(221, 97, 74);
+                textColor = new Color(255, 255, 255);
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
+                mountains = new ImageIcon(getClass().getResource("/backgrounds/mountains_brown.png"));
                 break;
             }
             case "orange": {
                 theme = "orange";
-                backgroundColor = new Color(255, 102, 0);
-                textColor = new Color(255, 166, 107);
-                placeholder = new ImageIcon(getClass().getResource("/images/placeholder_orange.png"));
+                backgroundColor = new Color(255, 163, 52);
+                textColor = new Color(255, 255, 255);
+                placeholder = new ImageIcon(getClass().getResource("/images/placeholder.png"));
+                mountains = new ImageIcon(getClass().getResource("/backgrounds/mountains_brown.png"));
                 break;
             }
         }

@@ -31,14 +31,14 @@ import static weather.app.WeatherUI.mouseY;
  *
  * @author Kamil
  */
-public class SettingsPage extends javax.swing.JFrame {
+public class SettingsUI extends javax.swing.JFrame {
    
     Color textfieldline = new Color(234,235,237);
     
     /**
      * Creates new form SettingsPage
      */
-    public SettingsPage() {
+    public SettingsUI() {
         initComponents();
         int positionY = (screenHeight - 518)/2;
         int positionX = (screenWidth - 300)/2;
@@ -46,6 +46,7 @@ public class SettingsPage extends javax.swing.JFrame {
         setSize(300, 518);
         setTitle("WeatherApp");
         setDefaultCloseOperation(3);
+        this.setBackground(new Color(1.0f,1.0f,1.0f,0f));
         
         jTextField1.setText(location);
         jTextField1.setBorder(new MatteBorder(0, 0, 1, 0, textfieldline));
@@ -64,12 +65,12 @@ public class SettingsPage extends javax.swing.JFrame {
     private void initComponents() {
 
         settingsApplyChangesLabel = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         orangeThemeColorLabel = new javax.swing.JLabel();
         greenThemeColorLabel = new javax.swing.JLabel();
         lightblueThemeColorLabel = new javax.swing.JLabel();
         redThemeColorLabel = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         jTextField3 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,11 +99,7 @@ public class SettingsPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(settingsApplyChangesLabel);
-        settingsApplyChangesLabel.setBounds(20, 460, 260, 30);
-
-        jSeparator2.setForeground(new java.awt.Color(234, 235, 237));
-        getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(20, 360, 260, 10);
+        settingsApplyChangesLabel.setBounds(20, 450, 260, 30);
 
         jSeparator1.setForeground(new java.awt.Color(234, 235, 237));
         getContentPane().add(jSeparator1);
@@ -151,6 +148,10 @@ public class SettingsPage extends javax.swing.JFrame {
         });
         getContentPane().add(redThemeColorLabel);
         redThemeColorLabel.setBounds(230, 300, 40, 40);
+
+        jSeparator3.setForeground(new java.awt.Color(234, 235, 237));
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(20, 360, 260, 10);
 
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setForeground(new java.awt.Color(102, 102, 102));
@@ -203,7 +204,7 @@ public class SettingsPage extends javax.swing.JFrame {
         jLabel3.setBounds(20, 150, 60, 20);
 
         settingsLabel.setFont(new java.awt.Font("Arial Nova", 0, 14)); // NOI18N
-        settingsLabel.setForeground(new java.awt.Color(204, 204, 204));
+        settingsLabel.setForeground(new java.awt.Color(255, 255, 255));
         settingsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         settingsLabel.setText("Settings");
         getContentPane().add(settingsLabel);
@@ -255,7 +256,7 @@ public class SettingsPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 300, 518);
+        jLabel1.setBounds(0, 0, 300, 510);
 
         colorPanelSettings.setBackground(backgroundColor);
 
@@ -375,7 +376,7 @@ public class SettingsPage extends javax.swing.JFrame {
             try {
                 writeData(location,api,theme);
             } catch (TransformerException | ParserConfigurationException ex) {
-                Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SettingsUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             getCurrentWeather();
@@ -387,17 +388,19 @@ public class SettingsPage extends javax.swing.JFrame {
             wUI.setVisible(true);
             
         } catch (InterruptedException ex) {
-            Logger.getLogger(SettingsPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch(DataNotFoundException ex){
             System.out.print("--> ERROR");
             System.out.println("\n" + "\u001B[31m" + "[ERROR]: Data for provided parameters wasn't found. Please, check your location.");
-            SettingsPage sp = new SettingsPage();
+            SettingsUI sp = new SettingsUI();
+            jTextField1.setForeground(Color.red);
             sp.setVisible(true);
         } catch (InvalidAuthTokenException ex) {
             System.out.print("--> ERROR");
             System.out.println("\n" + "\u001B[31m" + "[ERROR]: Api key is incorrect. Please, check your api.");
-            SettingsPage sp = new SettingsPage();
+            SettingsUI sp = new SettingsUI();
+            jTextField3.setForeground(Color.red);
             sp.setVisible(true);
         }
     }//GEN-LAST:event_settingsApplyChangesLabelMouseClicked
@@ -419,15 +422,16 @@ public class SettingsPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SettingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SettingsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new SettingsPage().setVisible(true);
+            new SettingsUI().setVisible(true);
         });
     }
 
@@ -442,9 +446,9 @@ public class SettingsPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JSeparator jSeparator3;
+    public static javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lightblueThemeColorLabel;
     private javax.swing.JLabel orangeThemeColorLabel;
     private javax.swing.JLabel redThemeColorLabel;
